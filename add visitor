@@ -1,0 +1,53 @@
+# Visitor Counter & Timestamp Feature
+
+Add a visitor counter and visitor log (with timestamps) to the portfolio site. Only visible to you (Hardik) via a secret admin panel.
+
+## User Review Required
+
+> [!IMPORTANT]
+> **Firebase Project Required**: This feature needs Firebase Realtime Database to store visitor data across all visitors. You'll need to:
+> 1. Go to [Firebase Console](https://console.firebase.google.com/)
+> 2. Create a new project (or reuse your existing one)
+> 3. Enable **Realtime Database** (not Firestore) → set rules to allow read/write
+> 4. Copy the Firebase config (apiKey, databaseURL, etc.)
+>
+> **Do you already have a Firebase project set up? If so, please share the config.**
+
+> [!IMPORTANT]
+> **Admin Access**: The admin panel will be hidden from normal visitors. You'll access it by adding `?admin=hardik` to your URL (e.g., `yoursite.com?admin=hardik`). Would you prefer a different secret key or a keyboard shortcut instead?
+
+## How It Works
+
+1. **Every visitor** that opens your site → counter increments by 1 and their visit is logged (timestamp, date, browser info)
+2. **Only you** can see the stats by adding `?admin=hardik` to the URL
+3. An **admin dashboard panel** slides in from the bottom-right showing:
+   - Total visitor count
+   - List of recent visits with date, time, and browser info
+   - A close button to hide it
+
+## Proposed Changes
+
+### Firebase Setup
+
+#### [MODIFY] [index.html](file:///d:/project%20new/index.html)
+- Add Firebase SDK scripts (Realtime Database)
+- Add hidden admin dashboard HTML panel at the bottom of the page
+
+#### [MODIFY] [main.js](file:///d:/project%20new/js/main.js)
+- Add Firebase config and initialization
+- Add function to record each visit (increment counter + log timestamp)
+- Add function to load visitor stats (counter + recent visits)
+- Add admin panel toggle logic (show only when `?admin=hardik` is in URL)
+
+#### [MODIFY] [style.css](file:///d:/project%20new/css/style.css)
+- Add styles for the admin dashboard panel (glassmorphism design, dark theme)
+- Responsive design for the panel
+
+## Verification Plan
+
+### Browser Testing
+1. Start local server: `npx -y http-server . -p 8080 --cors` from `d:\project new`
+2. Open `http://127.0.0.1:8080/index.html` → verify the admin panel is NOT visible
+3. Open `http://127.0.0.1:8080/index.html?admin=hardik` → verify the admin panel IS visible with visitor count and timestamps
+4. Refresh the page a few times → verify counter increments
+5. Check that timestamps appear correctly in the admin panel

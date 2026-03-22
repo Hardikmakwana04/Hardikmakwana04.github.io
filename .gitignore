@@ -1,0 +1,13 @@
+# IDE
+.vscode/
+
+# System
+Thumbs.db
+.DS_Store
+
+# Scratch files
+scratchpad_*.md
+implementation_plan.md
+
+# Node
+node_modules/
