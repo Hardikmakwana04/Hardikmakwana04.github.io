@@ -1,3 +1,28 @@
+/* ===== CERTIFICATE MODAL ===== */
+function openCertificateModal(imgSrc, title) {
+    const overlay = document.getElementById('cert-modal-overlay');
+    const img = document.getElementById('cert-modal-img');
+    const titleEl = document.getElementById('cert-modal-title');
+    if (!overlay || !img || !titleEl) return;
+
+    img.src = imgSrc;
+    titleEl.textContent = title;
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeCertificateModal() {
+    const overlay = document.getElementById('cert-modal-overlay');
+    if (!overlay) return;
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+// Close modal with Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeCertificateModal();
+});
+
 /* ===== FORCE DOWNLOAD UTILITY ===== */
 function forceDownload(fileUrl, fileName) {
     fetch(fileUrl)

@@ -453,15 +453,40 @@
                 <div class="section-divider"></div>
             </div>
 
-            <div class="cert-card">
+            <div class="cert-card" onclick="openCertificateModal('assets/social_media_certificate.jpg', 'Social Media Influencer')" style="cursor: pointer;" title="Click to view certificate">
                 <div class="cert-icon">
                     <i class="fas fa-certificate"></i>
                 </div>
                 <div class="cert-info">
-                    <h4>Social Media Influencer</h4>
-                    <p>Certified in social media strategy and influence</p>
+                    <h4>Social Media Influencer <i class="fas fa-external-link-alt" style="font-size: 0.7em; opacity: 0.6; margin-left: 6px;"></i></h4>
+                    <p>Media & Entertainment Skills Council — PMKVY | Skill India</p>
+                    <p style="font-size: 0.8em; opacity: 0.6; margin-top: 4px;">Certificate No: ADGJA002606909-031124 • Duration: 510 Hrs • Grade: B</p>
                 </div>
             </div>
+
+            <div class="cert-card" onclick="openCertificateModal('assets/ml_internship_certificate.png', 'Machine Learning Intern — Cognifyz Technologies')" style="cursor: pointer;" title="Click to view certificate">
+                <div class="cert-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <div class="cert-info">
+                    <h4>Machine Learning Intern <i class="fas fa-external-link-alt" style="font-size: 0.7em; opacity: 0.6; margin-left: 6px;"></i></h4>
+                    <p>Cognifyz Technologies — Internship Completion Certificate</p>
+                    <p style="font-size: 0.8em; opacity: 0.6; margin-top: 4px;">Intern ID: CTI/AI/C314552 • Duration: 20/02/2026 – 22/03/2026</p>
+                </div>
+            </div>
+
+    <!-- Certificate Modal -->
+    <div class="cert-modal-overlay" id="cert-modal-overlay" onclick="closeCertificateModal()">
+        <div class="cert-modal" onclick="event.stopPropagation()">
+            <button class="cert-modal-close" onclick="closeCertificateModal()" aria-label="Close">
+                <i class="fas fa-times"></i>
+            </button>
+            <h3 class="cert-modal-title" id="cert-modal-title"></h3>
+            <div class="cert-modal-img-wrapper">
+                <img src="" alt="Certificate" id="cert-modal-img" class="cert-modal-img">
+            </div>
+        </div>
+    </div>
         </div>
     </section>
 
