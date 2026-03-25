@@ -310,42 +310,207 @@
             </div>
 
             <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-date">
-                        <i class="fas fa-calendar-alt"></i> May 2025 – Expected May 2027
-                    </div>
-                    <h3 class="timeline-title">Master of Science in Artificial Intelligence (M.Sc. A.I.)</h3>
-                    <div class="timeline-subtitle">Swami Sahajanand College of Commerce & Management (Autonomous) —
-                        Bhavnagar, Gujarat</div>
-                    <ul class="timeline-list">
-                        <li>Pursuing postgraduate studies focused on Cloud Computing, Data Science, and Digital
-                            Forensics.</li>
-                        <li>Skilled in Python (Django), Node.js, Cloud Platforms, and Data Analysis tools.</li>
-                        <li>Applied theoretical knowledge through research projects and industry-based training.</li>
-                        <li>Gained expertise in network security, system design, and data management.</li>
-                        <li>Strengthened leadership, communication, and teamwork skills through professional coursework.
-                        </li>
-                    </ul>
+                <!-- Timeline connector line -->
+                <div class="timeline-line">
+                    <div class="timeline-line-fill"></div>
                 </div>
 
                 <div class="timeline-item">
-                    <div class="timeline-date">
-                        <i class="fas fa-calendar-alt"></i> Graduated May 2025
+                    <div class="timeline-node">
+                        <div class="timeline-node-dot">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="timeline-node-ring"></div>
                     </div>
-                    <h3 class="timeline-title">Bachelor of Science in Information Technology (B.Sc. I.T.)</h3>
-                    <div class="timeline-subtitle">Shree Swaminarayan College of Computer Science (M. K. Bhavnagar
-                        University) — Bhavnagar, Gujarat</div>
-                    <ul class="timeline-list">
-                        <li>B.Sc. in Information Technology from MKBU with a strong focus on core Computer Science
-                            subjects.</li>
-                        <li>Skilled in programming (C, C++, Java, PHP), databases, operating systems, and networking.
-                        </li>
-                        <li>Applied logical and analytical thinking through data structures and algorithms.</li>
-                        <li>Enhanced communication and soft skills through Business Communication & Personality
-                            Development.</li>
-                        <li>Completed project work with hands-on experience in software development and IT project
-                            management.</li>
-                    </ul>
+                    <div class="timeline-card">
+                        <div class="timeline-card-header">
+                            <div class="timeline-card-badge">
+                                <i class="fas fa-clock"></i> Pursuing
+                            </div>
+                            <div class="timeline-date">
+                                <i class="fas fa-calendar-alt"></i> May 2025 – Expected May 2027
+                            </div>
+                        </div>
+                        <h3 class="timeline-title">Master of Science in Artificial Intelligence (M.Sc. A.I.)</h3>
+                        <div class="timeline-subtitle">
+                            <i class="fas fa-university"></i> Swami Sahajanand College of Commerce & Management (Autonomous) — Bhavnagar, Gujarat
+                        </div>
+                        <div class="timeline-card-body">
+                            <ul class="timeline-list">
+                                <li>Pursuing postgraduate studies focused on Cloud Computing, Data Science, and Digital Forensics.</li>
+                                <li>Skilled in Python (Django), Node.js, Cloud Platforms, and Data Analysis tools.</li>
+                                <li>Applied theoretical knowledge through research projects and industry-based training.</li>
+                                <li>Gained expertise in network security, system design, and data management.</li>
+                                <li>Strengthened leadership, communication, and teamwork skills through professional coursework.</li>
+                            </ul>
+                        </div>
+                        <div class="timeline-card-tags">
+                            <span class="timeline-tag">Cloud Computing</span>
+                            <span class="timeline-tag">Data Science</span>
+                            <span class="timeline-tag">Digital Forensics</span>
+                            <span class="timeline-tag">AI/ML</span>
+                        </div>
+
+                        <!-- Semester 1 Results -->
+                        <div class="semester-results">
+                            <button class="semester-toggle" onclick="this.parentElement.classList.toggle('open')">
+                                <div class="semester-toggle-left">
+                                    <i class="fas fa-chart-bar"></i>
+                                    <span>Semester 1 Results — Nov 2025</span>
+                                </div>
+                                <div class="semester-toggle-right">
+                                    <span class="sgpa-badge">SGPA: 8.15</span>
+                                    <span class="grade-badge-a">Grade: A</span>
+                                    <i class="fas fa-chevron-down semester-arrow"></i>
+                                </div>
+                            </button>
+                            <div class="semester-details">
+                                <div class="semester-table-wrapper">
+                                    <table class="semester-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Subject</th>
+                                                <th>Type</th>
+                                                <th>Credits</th>
+                                                <th>Marks</th>
+                                                <th>%</th>
+                                                <th>Grade</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Digital Forensics-I</td>
+                                                <td><span class="type-tag theory">Theory</span></td>
+                                                <td>4</td>
+                                                <td>68</td>
+                                                <td>68.00%</td>
+                                                <td><span class="grade-cell bplus">B+</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Cloud Computing-I</td>
+                                                <td><span class="type-tag theory">Theory</span></td>
+                                                <td>3</td>
+                                                <td>53</td>
+                                                <td>75.71%</td>
+                                                <td><span class="grade-cell bplus">B+</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Cloud Computing-I</td>
+                                                <td><span class="type-tag practical">Practical</span></td>
+                                                <td>1</td>
+                                                <td>26</td>
+                                                <td>86.67%</td>
+                                                <td><span class="grade-cell aplus">A+</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Data Science-I</td>
+                                                <td><span class="type-tag theory">Theory</span></td>
+                                                <td>3</td>
+                                                <td>54</td>
+                                                <td>77.14%</td>
+                                                <td><span class="grade-cell a-grade">A</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Data Science-I</td>
+                                                <td><span class="type-tag practical">Practical</span></td>
+                                                <td>1</td>
+                                                <td>26</td>
+                                                <td>86.67%</td>
+                                                <td><span class="grade-cell aplus">A+</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Minor Research Project-I</td>
+                                                <td><span class="type-tag project">Project</span></td>
+                                                <td>4</td>
+                                                <td>91</td>
+                                                <td>91.00%</td>
+                                                <td><span class="grade-cell aplus">A+</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>On-The-Job Training-I</td>
+                                                <td><span class="type-tag project">Project</span></td>
+                                                <td>4</td>
+                                                <td>91</td>
+                                                <td>91.00%</td>
+                                                <td><span class="grade-cell aplus">A+</span></td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr class="total-row">
+                                                <td><strong>Total</strong></td>
+                                                <td></td>
+                                                <td><strong>20</strong></td>
+                                                <td><strong>409</strong></td>
+                                                <td></td>
+                                                <td><span class="grade-cell a-grade">A</span></td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <div class="semester-summary-bar">
+                                    <div class="summary-item">
+                                        <span class="summary-label">Total Credits</span>
+                                        <span class="summary-value">20</span>
+                                    </div>
+                                    <div class="summary-item">
+                                        <span class="summary-label">Credits Obtained</span>
+                                        <span class="summary-value">20</span>
+                                    </div>
+                                    <div class="summary-item">
+                                        <span class="summary-label">SGPA</span>
+                                        <span class="summary-value highlight">8.15</span>
+                                    </div>
+                                    <div class="summary-item">
+                                        <span class="summary-label">Result</span>
+                                        <span class="summary-value pass">PASS</span>
+                                    </div>
+                                </div>
+                                <div class="semester-marksheet-btn-wrap">
+                                    <button class="semester-view-marksheet-btn" onclick="event.stopPropagation(); openCertificateModal('assets/sem1_marksheet.png', 'Semester 1 — Official Marksheet')">
+                                        <i class="fas fa-file-alt"></i> View Official Marksheet
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-node">
+                        <div class="timeline-node-dot">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div class="timeline-node-ring"></div>
+                    </div>
+                    <div class="timeline-card">
+                        <div class="timeline-card-header">
+                            <div class="timeline-card-badge completed">
+                                <i class="fas fa-check-circle"></i> Completed
+                            </div>
+                            <div class="timeline-date">
+                                <i class="fas fa-calendar-alt"></i> Graduated May 2025
+                            </div>
+                        </div>
+                        <h3 class="timeline-title">Bachelor of Science in Information Technology (B.Sc. I.T.)</h3>
+                        <div class="timeline-subtitle">
+                            <i class="fas fa-university"></i> Shree Swaminarayan College of Computer Science (M. K. Bhavnagar University) — Bhavnagar, Gujarat
+                        </div>
+                        <div class="timeline-card-body">
+                            <ul class="timeline-list">
+                                <li>B.Sc. in Information Technology from MKBU with a strong focus on core Computer Science subjects.</li>
+                                <li>Skilled in programming (C, C++, Java, PHP), databases, operating systems, and networking.</li>
+                                <li>Applied logical and analytical thinking through data structures and algorithms.</li>
+                                <li>Enhanced communication and soft skills through Business Communication & Personality Development.</li>
+                                <li>Completed project work with hands-on experience in software development and IT project management.</li>
+                            </ul>
+                        </div>
+                        <div class="timeline-card-tags">
+                            <span class="timeline-tag">Programming</span>
+                            <span class="timeline-tag">Databases</span>
+                            <span class="timeline-tag">Networking</span>
+                            <span class="timeline-tag">Software Dev</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

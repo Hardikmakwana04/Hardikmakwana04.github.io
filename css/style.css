@@ -917,76 +917,235 @@ img {
 }
 
 /* ===== EDUCATION SECTION ===== */
+/* ===== TIMELINE — MODERN DESIGN ===== */
 .timeline {
     position: relative;
-    padding-left: 40px;
+    max-width: 800px;
+    margin: 0 auto;
+    padding-left: 60px;
 }
 
-.timeline::before {
-    content: '';
+/* Animated gradient connector line */
+.timeline-line {
     position: absolute;
-    left: 12px;
+    left: 24px;
     top: 0;
     bottom: 0;
-    width: 2px;
-    background: linear-gradient(to bottom, var(--accent-1), var(--accent-2));
-    opacity: 0.3;
+    width: 3px;
+    background: rgba(108, 99, 255, 0.08);
+    border-radius: 3px;
+    overflow: hidden;
 }
 
+.timeline-line-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, var(--accent-1), var(--accent-2), var(--accent-1));
+    background-size: 100% 200%;
+    animation: timeline-flow 4s ease-in-out infinite;
+    border-radius: 3px;
+    box-shadow: 0 0 12px rgba(108, 99, 255, 0.4), 0 0 24px rgba(0, 212, 170, 0.15);
+}
+
+@keyframes timeline-flow {
+    0%, 100% { background-position: 0% 0%; }
+    50% { background-position: 0% 100%; }
+}
+
+/* Timeline item — flexbox layout with node + card */
 .timeline-item {
     position: relative;
+    display: flex;
+    gap: 24px;
     margin-bottom: 48px;
-    padding: 32px;
+    align-items: flex-start;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+/* Glowing icon node */
+.timeline-node {
+    position: absolute;
+    left: -48px;
+    top: 28px;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.timeline-node-dot {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--bg-primary);
+    border: 2px solid var(--accent-1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    color: var(--accent-1);
+    position: relative;
+    z-index: 2;
+    transition: all 0.4s ease;
+    box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.1);
+}
+
+.timeline-item:hover .timeline-node-dot {
+    background: var(--accent-gradient);
+    background-size: 200% auto;
+    color: #fff;
+    border-color: transparent;
+    box-shadow: 0 0 20px rgba(108, 99, 255, 0.5), 0 0 40px rgba(108, 99, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.timeline-node-ring {
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 1.5px dashed rgba(108, 99, 255, 0.2);
+    animation: rotate-ring 12s linear infinite;
+}
+
+/* Timeline card — glassmorphic */
+.timeline-card {
+    flex: 1;
+    padding: 28px 32px;
     background: var(--bg-glass);
     border: 1px solid var(--border-glass);
     border-radius: var(--radius-lg);
-    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.timeline-item:hover {
-    border-color: rgba(108, 99, 255, 0.15);
-    box-shadow: var(--shadow-glow);
-    transform: translateX(4px);
-}
-
-.timeline-item::before {
+/* Top accent gradient bar */
+.timeline-card::before {
     content: '';
     position: absolute;
-    left: -34px;
-    top: 36px;
-    width: 12px;
-    height: 12px;
-    background: var(--accent-1);
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--accent-gradient);
+    background-size: 200% auto;
+    animation: shimmer 3s linear infinite;
+    opacity: 0.6;
+    transition: opacity 0.4s ease;
+}
+
+/* Corner glow on hover */
+.timeline-card::after {
+    content: '';
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, rgba(108, 99, 255, 0.08), transparent 70%);
     border-radius: 50%;
-    border: 3px solid var(--bg-primary);
-    box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.timeline-item:hover .timeline-card {
+    border-color: rgba(108, 99, 255, 0.2);
+    box-shadow: 0 12px 48px rgba(108, 99, 255, 0.12), 0 0 0 1px rgba(108, 99, 255, 0.05);
+    transform: translateY(-4px);
+}
+
+.timeline-item:hover .timeline-card::before {
+    opacity: 1;
+}
+
+.timeline-item:hover .timeline-card::after {
+    opacity: 1;
+}
+
+/* Card header — badge + date row */
+.timeline-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.timeline-card-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 14px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: rgba(108, 99, 255, 0.12);
+    color: var(--accent-1);
+    border: 1px solid rgba(108, 99, 255, 0.15);
+}
+
+.timeline-card-badge.completed {
+    background: rgba(0, 212, 170, 0.12);
+    color: var(--accent-2);
+    border-color: rgba(0, 212, 170, 0.15);
 }
 
 .timeline-date {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 6px 16px;
-    background: rgba(108, 99, 255, 0.08);
-    border-radius: 50px;
     font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--accent-1);
-    margin-bottom: 16px;
+    font-weight: 500;
+    color: var(--text-muted);
 }
 
+.timeline-date i {
+    font-size: 0.75rem;
+}
+
+/* Card title and subtitle */
 .timeline-title {
     font-family: var(--font-heading);
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     font-weight: 700;
-    margin-bottom: 4px;
+    margin-bottom: 8px;
+    line-height: 1.3;
 }
 
 .timeline-subtitle {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     color: var(--accent-2);
     margin-bottom: 16px;
     font-weight: 500;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    line-height: 1.5;
+}
+
+.timeline-subtitle i {
+    margin-top: 3px;
+    flex-shrink: 0;
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+
+/* Card body — list */
+.timeline-card-body {
+    padding: 16px 0 12px;
+    border-top: 1px solid var(--border-glass);
 }
 
 .timeline-list {
@@ -995,19 +1154,110 @@ img {
 
 .timeline-list li {
     position: relative;
-    padding-left: 20px;
-    margin-bottom: 8px;
-    font-size: 0.9rem;
+    padding-left: 24px;
+    margin-bottom: 10px;
+    font-size: 0.88rem;
     color: var(--text-secondary);
     line-height: 1.7;
+    transition: color 0.3s ease;
+}
+
+.timeline-list li:last-child {
+    margin-bottom: 0;
 }
 
 .timeline-list li::before {
-    content: '▸';
+    content: '';
     position: absolute;
     left: 0;
+    top: 10px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent-1);
+    box-shadow: 0 0 6px rgba(108, 99, 255, 0.4);
+    transition: all 0.3s ease;
+}
+
+.timeline-list li:hover::before {
+    background: var(--accent-2);
+    box-shadow: 0 0 10px rgba(0, 212, 170, 0.5);
+    transform: scale(1.3);
+}
+
+.timeline-list li:hover {
+    color: var(--text-primary);
+}
+
+/* Tags at the bottom */
+.timeline-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-glass);
+}
+
+.timeline-tag {
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    background: rgba(108, 99, 255, 0.06);
+    color: var(--text-muted);
+    border: 1px solid rgba(108, 99, 255, 0.08);
+    transition: all 0.3s ease;
+}
+
+.timeline-tag:hover {
+    background: rgba(108, 99, 255, 0.12);
     color: var(--accent-1);
-    font-size: 0.8rem;
+    border-color: rgba(108, 99, 255, 0.2);
+}
+
+/* === Timeline Responsive === */
+@media (max-width: 768px) {
+    .timeline {
+        padding-left: 48px;
+    }
+
+    .timeline-line {
+        left: 16px;
+    }
+
+    .timeline-node {
+        left: -40px;
+        width: 36px;
+        height: 36px;
+    }
+
+    .timeline-node-dot {
+        width: 36px;
+        height: 36px;
+        font-size: 0.8rem;
+    }
+
+    .timeline-node-ring {
+        inset: -4px;
+    }
+
+    .timeline-card {
+        padding: 20px;
+    }
+
+    .timeline-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .timeline-title {
+        font-size: 1.05rem;
+    }
+
+    .timeline-subtitle {
+        font-size: 0.85rem;
+    }
 }
 
 /* ===== EXPERIENCE SECTION ===== */
@@ -2101,4 +2351,348 @@ img {
         height: 44px;
         font-size: 1.1rem;
     }
+}
+
+/* ===== SEMESTER RESULTS (Education Section) ===== */
+.semester-results {
+    margin-top: 20px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-glass);
+    overflow: hidden;
+    background: rgba(10, 10, 15, 0.5);
+    transition: border-color var(--transition-base);
+}
+
+.semester-results:hover {
+    border-color: rgba(108, 99, 255, 0.15);
+}
+
+.semester-results.open {
+    border-color: rgba(108, 99, 255, 0.25);
+}
+
+.semester-toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    gap: 12px;
+    transition: background var(--transition-base);
+}
+
+.semester-toggle:hover {
+    background: rgba(108, 99, 255, 0.04);
+}
+
+.semester-toggle-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+}
+
+.semester-toggle-left i {
+    color: var(--accent-1);
+    font-size: 1rem;
+}
+
+.semester-toggle-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sgpa-badge {
+    padding: 4px 12px;
+    background: linear-gradient(135deg, rgba(108, 99, 255, 0.15), rgba(0, 212, 170, 0.1));
+    border: 1px solid rgba(108, 99, 255, 0.2);
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--accent-1);
+    letter-spacing: 0.5px;
+}
+
+.grade-badge-a {
+    padding: 4px 12px;
+    background: rgba(0, 212, 170, 0.1);
+    border: 1px solid rgba(0, 212, 170, 0.25);
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--accent-2);
+    letter-spacing: 0.5px;
+}
+
+.semester-arrow {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    transition: transform 0.3s ease;
+}
+
+.semester-results.open .semester-arrow {
+    transform: rotate(180deg);
+}
+
+/* Collapsible details */
+.semester-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.semester-results.open .semester-details {
+    max-height: 800px;
+}
+
+/* Table Styles */
+.semester-table-wrapper {
+    padding: 0 16px;
+    overflow-x: auto;
+}
+
+.semester-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+}
+
+.semester-table thead th {
+    padding: 12px 14px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid var(--border-glass);
+    white-space: nowrap;
+}
+
+.semester-table tbody td {
+    padding: 11px 14px;
+    color: var(--text-secondary);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    vertical-align: middle;
+}
+
+.semester-table tbody tr:hover {
+    background: rgba(108, 99, 255, 0.03);
+}
+
+.semester-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.semester-table tfoot td {
+    padding: 12px 14px;
+    border-top: 1px solid rgba(108, 99, 255, 0.15);
+    color: var(--text-primary);
+}
+
+/* Type Tags */
+.type-tag {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 50px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+}
+
+.type-tag.theory {
+    background: rgba(108, 99, 255, 0.1);
+    color: var(--accent-1);
+    border: 1px solid rgba(108, 99, 255, 0.15);
+}
+
+.type-tag.practical {
+    background: rgba(0, 212, 170, 0.1);
+    color: var(--accent-2);
+    border: 1px solid rgba(0, 212, 170, 0.15);
+}
+
+.type-tag.project {
+    background: rgba(255, 187, 51, 0.1);
+    color: #ffbb33;
+    border: 1px solid rgba(255, 187, 51, 0.15);
+}
+
+/* Grade Cells */
+.grade-cell {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.grade-cell.aplus {
+    background: rgba(0, 212, 170, 0.12);
+    color: #00d4aa;
+}
+
+.grade-cell.a-grade {
+    background: rgba(76, 175, 80, 0.12);
+    color: #66bb6a;
+}
+
+.grade-cell.bplus {
+    background: rgba(108, 99, 255, 0.12);
+    color: #8b83ff;
+}
+
+.total-row td {
+    font-weight: 600;
+}
+
+/* Summary Bar */
+.semester-summary-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 16px 20px;
+    margin: 8px 16px 16px;
+    background: rgba(108, 99, 255, 0.04);
+    border: 1px solid rgba(108, 99, 255, 0.08);
+    border-radius: var(--radius-sm);
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.summary-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 4px;
+}
+
+.summary-label {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+
+.summary-value {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.summary-value.highlight {
+    background: var(--accent-gradient);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 3s linear infinite;
+}
+
+.summary-value.pass {
+    color: var(--accent-2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .semester-toggle {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 14px 16px;
+    }
+
+    .semester-toggle-right {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .semester-table {
+        font-size: 0.8rem;
+    }
+
+    .semester-table thead th,
+    .semester-table tbody td,
+    .semester-table tfoot td {
+        padding: 9px 10px;
+    }
+
+    .semester-summary-bar {
+        padding: 14px;
+        margin: 8px 12px 12px;
+    }
+
+    .summary-value {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .semester-table thead th:nth-child(5),
+    .semester-table tbody td:nth-child(5),
+    .semester-table tfoot td:nth-child(5) {
+        display: none;
+    }
+
+    .sgpa-badge, .grade-badge-a {
+        font-size: 0.7rem;
+        padding: 3px 8px;
+    }
+
+    .semester-summary-bar {
+        gap: 12px;
+    }
+
+    .summary-item {
+        flex: 1;
+        min-width: 60px;
+    }
+}
+
+/* Semester Marksheet Button */
+.semester-marksheet-btn-wrap {
+    padding: 0 16px 16px;
+    text-align: center;
+}
+
+.semester-view-marksheet-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 24px;
+    background: var(--accent-gradient);
+    background-size: 200% auto;
+    border: none;
+    border-radius: 50px;
+    color: #fff;
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    box-shadow: 0 4px 15px rgba(108, 99, 255, 0.25);
+    letter-spacing: 0.3px;
+}
+
+.semester-view-marksheet-btn:hover {
+    background-position: right center;
+    box-shadow: 0 6px 25px rgba(108, 99, 255, 0.4);
+    transform: translateY(-2px);
+}
+
+.semester-view-marksheet-btn i {
+    font-size: 0.9rem;
 }
