@@ -40,8 +40,12 @@
 
     <!-- Preloader -->
     <div class="preloader">
-        <div class="preloader-spinner"></div>
-        <div class="preloader-text">Loading</div>
+        <div class="preloader-ring">
+            <div class="preloader-glow"></div>
+        </div>
+        <div class="preloader-text">
+            <span>L</span><span>O</span><span>A</span><span>D</span><span>I</span><span>N</span><span>G</span>
+        </div>
     </div>
 
     <!-- Navbar -->
@@ -71,10 +75,11 @@
     <!-- ========== HERO SECTION ========== -->
     <section class="hero" id="hero">
         <div class="hero-bg">
-            <div class="hero-gradient-orb orb-1"></div>
+        <div class="hero-gradient-orb orb-1"></div>
             <div class="hero-gradient-orb orb-2"></div>
             <div class="hero-gradient-orb orb-3"></div>
             <div class="hero-grid"></div>
+            <canvas id="particle-canvas"></canvas>
         </div>
 
         <div class="hero-container">
@@ -86,7 +91,7 @@
 
                 <h1 class="hero-name">
                     Hi, I'm<br>
-                    <span class="gradient-text">Hardik Makwana</span>
+                    <span class="gradient-text decrypt-text" id="hero-decrypt">Hardik Makwana</span>
                 </h1>
 
                 <div class="hero-tagline">
@@ -99,11 +104,11 @@
                 </p>
 
                 <div class="hero-actions">
-                    <a href="#contact" class="btn btn-primary">
+                    <a href="#contact" class="btn btn-primary magnetic-btn">
                         <i class="fas fa-paper-plane"></i> Get In Touch
                     </a>
                     <a href="#" onclick="event.preventDefault(); forceDownload('assets/Hardik_Makwana_Resume.pdf', 'Hardik Makwana Resume.pdf')"
-                        class="btn btn-outline">
+                        class="btn btn-outline magnetic-btn">
                         <i class="fas fa-file-arrow-down"></i> Download Resume
                     </a>
                 </div>
@@ -156,7 +161,7 @@
         <div class="section-container">
             <div class="section-header">
                 <div class="section-label">About Me</div>
-                <h2 class="section-title">Know Me Better</h2>
+                <h2 class="section-title shiny-text">Know Me Better</h2>
                 <div class="section-divider"></div>
             </div>
 
@@ -202,7 +207,7 @@
         <div class="section-container">
             <div class="section-header">
                 <div class="section-label">Skills</div>
-                <h2 class="section-title">My Technical Arsenal</h2>
+                <h2 class="section-title shiny-text">My Technical Arsenal</h2>
                 <p class="section-subtitle">Technologies and tools I work with to build amazing digital experiences.</p>
                 <div class="section-divider"></div>
             </div>
@@ -305,7 +310,7 @@
         <div class="section-container">
             <div class="section-header">
                 <div class="section-label">Education</div>
-                <h2 class="section-title">Academic Journey</h2>
+                <h2 class="section-title shiny-text">Academic Journey</h2>
                 <div class="section-divider"></div>
             </div>
 
@@ -521,11 +526,11 @@
         <div class="section-container">
             <div class="section-header">
                 <div class="section-label">Experience</div>
-                <h2 class="section-title">Professional Journey</h2>
+                <h2 class="section-title shiny-text">Professional Journey</h2>
                 <div class="section-divider"></div>
             </div>
 
-            <div class="experience-card">
+            <div class="experience-card gradient-border-card">
                 <div class="experience-header">
                     <div>
                         <h3 class="experience-role">Cashier (Part Time)</h3>
@@ -549,12 +554,12 @@
         <div class="section-container">
             <div class="section-header">
                 <div class="section-label">Projects</div>
-                <h2 class="section-title">What I've Built</h2>
+                <h2 class="section-title shiny-text">What I've Built</h2>
                 <p class="section-subtitle">Bringing ideas to life through code and collaboration.</p>
                 <div class="section-divider"></div>
             </div>
 
-            <div class="project-card">
+            <div class="project-card gradient-border-card">
                 <div class="project-header">
                     <div>
                         <h3 class="project-title">FitFlex</h3>
@@ -596,11 +601,11 @@
 
                     <div class="project-actions">
                         <a href="https://github.com/Hardikmakwana04" target="_blank" rel="noopener"
-                            class="btn btn-primary">
+                            class="btn btn-primary magnetic-btn">
                             <i class="fab fa-github"></i> View on GitHub
                         </a>
                         <a href="#" onclick="event.preventDefault(); forceDownload('assets/FITFLEX_DOCUMENTATION.pdf', 'Project Documentation.pdf')"
-                            class="btn btn-outline">
+                            class="btn btn-outline magnetic-btn">
                             <i class="fas fa-file-pdf"></i> Download Documentation
                         </a>
                     </div>
@@ -614,7 +619,7 @@
         <div class="section-container">
             <div class="section-header">
                 <div class="section-label">Certificates</div>
-                <h2 class="section-title">Certifications & Achievements</h2>
+                <h2 class="section-title shiny-text">Certifications & Achievements</h2>
                 <div class="section-divider"></div>
             </div>
 
@@ -660,7 +665,7 @@
         <div class="section-container">
             <div class="section-header">
                 <div class="section-label">Languages</div>
-                <h2 class="section-title">Languages I Speak</h2>
+                <h2 class="section-title shiny-text">Languages I Speak</h2>
                 <div class="section-divider"></div>
             </div>
 
@@ -686,7 +691,7 @@
         <div class="section-container">
             <div class="section-header">
                 <div class="section-label">Contact</div>
-                <h2 class="section-title">Get In Touch</h2>
+                <h2 class="section-title shiny-text">Get In Touch</h2>
                 <p class="section-subtitle">Have a project in mind or want to collaborate? Let's talk!</p>
                 <div class="section-divider"></div>
             </div>
@@ -759,7 +764,7 @@
                         <textarea id="message" name="message" placeholder="Tell me about your project..."
                             required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary form-submit">
+                    <button type="submit" class="btn btn-primary form-submit magnetic-btn">
                         <i class="fas fa-paper-plane"></i> Send Message
                     </button>
                     <div class="form-status" id="form-status"></div>
