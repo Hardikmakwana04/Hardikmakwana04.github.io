@@ -829,12 +829,17 @@ img {
     justify-content: center;
     align-items: center;
     position: relative;
+    perspective: 900px;  /* 3D space for the card to tilt into */
 }
 
 .hero-image-container {
     position: relative;
     width: 380px;
     height: 380px;
+    transform-style: preserve-3d;
+    transition: transform 0.08s linear;
+    will-change: transform;
+    cursor: none;
 }
 
 .hero-image-ring {
@@ -872,6 +877,43 @@ img {
     border: 3px solid var(--border-glass);
     position: relative;
     z-index: 1;
+    transition: box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.hero-image-container:hover .hero-image {
+    border-color: rgba(108, 99, 255, 0.4);
+    box-shadow: 0 0 40px rgba(108, 99, 255, 0.25), 0 0 80px rgba(108, 99, 255, 0.1);
+}
+
+/* Cursor-reactive ring — appears on hover */
+.hero-image-cursor-ring {
+    position: absolute;
+    inset: -22px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-top-color: rgba(0, 212, 170, 0.8);
+    border-right-color: rgba(108, 99, 255, 0.6);
+    opacity: 0;
+    transform: scale(0.85) rotate(0deg);
+    transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 3;
+    pointer-events: none;
+    animation: rotate-ring 3s linear infinite;
+}
+
+.hero-image-container:hover .hero-image-cursor-ring {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+}
+
+/* 3D depth label — floats out of the photo plane */
+.hero-3d-depth-layer {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    transform: translateZ(20px);
+    pointer-events: none;
+    z-index: 0;
 }
 
 .hero-image-glow {

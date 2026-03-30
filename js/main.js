@@ -43,6 +43,72 @@ function forceDownload(fileUrl, fileName) {
         });
 }
 
+/* ===== 3D PHOTO TILT EFFECT ===== */
+function initPhoto3DTilt() {
+    const container = document.getElementById('hero-image-container');
+    if (!container) return;
+
+    const MAX_TILT = 18;       // max rotation in degrees
+    const SCALE_HOVER = 1.04;  // slight scale-up on hover
+    const LERP = 0.12;         // smoothing factor (lower = smoother/slower)
+
+    let targetX = 0, targetY = 0;
+    let currentX = 0, currentY = 0;
+    let rafId = null;
+    let isHovering = false;
+
+    function lerp(a, b, t) { return a + (b - a) * t; }
+
+    function animate() {
+        currentX = lerp(currentX, targetX, LERP);
+        currentY = lerp(currentY, targetY, LERP);
+
+        container.style.transform =
+            `perspective(900px) rotateX(${currentX}deg) rotateY(${currentY}deg) scale(${isHovering ? SCALE_HOVER : 1})`;
+
+        // Keep animating until values settle
+        if (Math.abs(currentX - targetX) > 0.01 ||
+            Math.abs(currentY - targetY) > 0.01) {
+            rafId = requestAnimationFrame(animate);
+        } else {
+            rafId = null;
+        }
+    }
+
+    function startAnimate() {
+        if (!rafId) rafId = requestAnimationFrame(animate);
+    }
+
+    container.addEventListener('mousemove', (e) => {
+        const rect = container.getBoundingClientRect();
+        // Normalized -1 to +1 within the element
+        const nx = (e.clientX - rect.left) / rect.width  * 2 - 1;
+        const ny = (e.clientY - rect.top)  / rect.height * 2 - 1;
+
+        // rotateX (lean forward/back) is driven by vertical mouse, inverted
+        targetX = -ny * MAX_TILT;
+        // rotateY (lean left/right) is driven by horizontal mouse
+        targetY =  nx * MAX_TILT;
+
+        startAnimate();
+    });
+
+    container.addEventListener('mouseenter', () => {
+        isHovering = true;
+        startAnimate();
+    });
+
+    container.addEventListener('mouseleave', () => {
+        isHovering = false;
+        targetX = 0;
+        targetY = 0;
+        startAnimate();
+    });
+}
+
+// Initialise immediately (DOM is ready since script is at bottom of body)
+initPhoto3DTilt();
+
 /* ===== PARTICLE CANVAS BACKGROUND ===== */
 function initParticles() {
     const canvas = document.getElementById('particle-canvas');
