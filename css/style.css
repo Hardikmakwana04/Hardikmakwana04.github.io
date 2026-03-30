@@ -3159,6 +3159,21 @@ img {
     position: relative;
     display: flex;
     align-items: center;
+    perspective: 1200px;
+}
+
+/* Inner item wrapper for 3D animation */
+.hm-dock__item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    transform-style: preserve-3d;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.hm-dock__slot:hover .hm-dock__item {
+    transform: translateX(-50px) translateZ(80px) scale(1.35) rotateY(15deg);
+    z-index: 10;
 }
 
 /* Icon button — transparent glass */
@@ -3176,6 +3191,7 @@ img {
     align-items: center;
     justify-content: center;
     position: relative;
+    transform-style: preserve-3d;
     transition:
         color 0.25s ease,
         background 0.25s ease,
@@ -3185,12 +3201,16 @@ img {
     box-shadow: none;
 }
 
+.hm-dock__btn i {
+    transform: translateZ(15px);
+    transition: transform 0.4s ease;
+}
+
 .hm-dock__btn:hover {
     color: #fff;
     background: rgba(255, 255, 255, 0.08);
     border-color: color-mix(in srgb, var(--c) 40%, transparent);
     box-shadow: 0 0 20px color-mix(in srgb, var(--c) 20%, transparent);
-    transform: scale(1.15) translateX(-4px);
 }
 
 /* Active state */
@@ -3213,6 +3233,7 @@ img {
     border: 2px solid var(--c, #8251ee);
     opacity: 0.65;
     pointer-events: none;
+    transform: translateZ(-5px);
 }
 
 /* Active pulse */
@@ -3222,6 +3243,7 @@ img {
     border-radius: 20px;
     border: 2px solid var(--c, #8251ee);
     pointer-events: none;
+    transform: translateZ(-15px);
     animation: hm-pulse 2s ease-out infinite;
 }
 
