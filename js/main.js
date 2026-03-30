@@ -378,21 +378,25 @@ if (cursorDot && cursorRing) {
 }
 
 /* ===== THEME TOGGLE ===== */
-const themeToggleBtn = document.getElementById('theme-toggle');
-const htmlRoot = document.documentElement;
+document.addEventListener('DOMContentLoaded', function () {
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const htmlRoot = document.documentElement;
 
-function applyTheme(theme) {
-    if (theme === 'light') {
-        htmlRoot.setAttribute('data-theme', 'light');
-    } else {
-        htmlRoot.removeAttribute('data-theme');
+    function applyTheme(theme) {
+        if (theme === 'light') {
+            htmlRoot.setAttribute('data-theme', 'light');
+        } else {
+            htmlRoot.removeAttribute('data-theme');
+        }
+        localStorage.setItem('hm-theme', theme);
     }
-    localStorage.setItem('hm-theme', theme);
-}
 
-themeToggleBtn?.addEventListener('click', () => {
-    const current = htmlRoot.getAttribute('data-theme');
-    applyTheme(current === 'light' ? 'dark' : 'light');
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', function () {
+            const current = htmlRoot.getAttribute('data-theme');
+            applyTheme(current === 'light' ? 'dark' : 'light');
+        });
+    }
 });
 
 /* ===== NAVBAR ===== */

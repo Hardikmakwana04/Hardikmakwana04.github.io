@@ -48,9 +48,8 @@
 }
 
 /* Light mode specific overrides */
-[data-theme="light"] body {
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
+html {
+    transition: background-color 0.35s ease, color 0.35s ease;
 }
 
 [data-theme="light"] .navbar {
