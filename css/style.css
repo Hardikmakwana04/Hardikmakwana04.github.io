@@ -3091,3 +3091,196 @@ img {
 .contact-form:focus-within::before {
     opacity: 1;
 }
+
+/* ================================================================
+   FLOATING ICON DOCK — Transparent Glass Navigation
+   ================================================================ */
+
+/* Full-height wrapper for vertical centering via flexbox */
+.hm-dock-wrapper {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 40px;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateX(80px);
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.hm-dock-wrapper.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* The nav catches pointer events */
+.hm-dock {
+    position: relative;
+    pointer-events: auto;
+}
+
+/* Ambient glow — subtle */
+.hm-dock__glow {
+    position: absolute;
+    inset: -24px;
+    border-radius: 60px;
+    background: radial-gradient(ellipse at center, var(--glow-c, #8251ee) 0%, transparent 72%);
+    opacity: 0.08;
+    filter: blur(22px);
+    pointer-events: none;
+    transition: background 0.6s;
+}
+
+/* Glass pill container — fully transparent / see-through */
+.hm-dock__glass {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    padding: 16px 12px;
+    border-radius: 34px;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(16px) saturate(120%);
+    -webkit-backdrop-filter: blur(16px) saturate(120%);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* Slot wrapper */
+.hm-dock__slot {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Icon button — transparent glass */
+.hm-dock__btn {
+    --c: #8251ee;
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    background: rgba(255, 255, 255, 0.03);
+    color: rgba(255, 255, 255, 0.35);
+    font-size: 1.4rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition:
+        color 0.25s ease,
+        background 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: none;
+}
+
+.hm-dock__btn:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.08);
+    border-color: color-mix(in srgb, var(--c) 40%, transparent);
+    box-shadow: 0 0 20px color-mix(in srgb, var(--c) 20%, transparent);
+    transform: scale(1.15) translateX(-4px);
+}
+
+/* Active state */
+.hm-dock__btn--on {
+    color: #fff;
+    background: color-mix(in srgb, var(--c) 15%, transparent);
+    border-color: color-mix(in srgb, var(--c) 50%, transparent);
+    box-shadow: 0 0 24px color-mix(in srgb, var(--c) 25%, transparent);
+}
+
+.hm-dock__btn--on i {
+    filter: drop-shadow(0 0 8px var(--c));
+}
+
+/* Active ring */
+.hm-dock__ring {
+    position: absolute;
+    inset: -4px;
+    border-radius: 20px;
+    border: 2px solid var(--c, #8251ee);
+    opacity: 0.65;
+    pointer-events: none;
+}
+
+/* Active pulse */
+.hm-dock__pulse {
+    position: absolute;
+    inset: -4px;
+    border-radius: 20px;
+    border: 2px solid var(--c, #8251ee);
+    pointer-events: none;
+    animation: hm-pulse 2s ease-out infinite;
+}
+
+@keyframes hm-pulse {
+    0%   { transform: scale(1);   opacity: 0.6; }
+    100% { transform: scale(1.7); opacity: 0;   }
+}
+
+/* Tooltip — hidden by default, shown on hover */
+.hm-dock__tip {
+    position: absolute;
+    right: calc(100% + 16px);
+    white-space: nowrap;
+    padding: 8px 18px;
+    background: linear-gradient(145deg,
+        rgba(18, 18, 28, 0.96),
+        rgba(28, 18, 40, 0.96)
+    );
+    backdrop-filter: blur(14px);
+    border: 1px solid color-mix(in srgb, var(--c, #8251ee) 45%, transparent);
+    border-radius: 12px;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.4px;
+    pointer-events: none;
+    box-shadow:
+        0 8px 28px rgba(0, 0, 0, 0.55),
+        0 0 16px color-mix(in srgb, var(--c, #8251ee) 20%, transparent);
+    opacity: 0;
+    transform: translateX(12px) scale(0.9);
+    transition: opacity 0.2s ease, transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.hm-dock__slot:hover .hm-dock__tip {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+}
+
+/* Inherit --c from the button's inline style for tooltip border color */
+.hm-dock__slot:hover .hm-dock__tip {
+    border-color: color-mix(in srgb, var(--c, #8251ee) 45%, transparent);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .hm-dock-wrapper { display: none !important; }
+}
+
+@media (max-height: 680px) {
+    .hm-dock__glass { gap: 2px; padding: 10px 10px; border-radius: 26px; }
+    .hm-dock__btn { width: 44px; height: 44px; font-size: 1.1rem; border-radius: 13px; }
+    .hm-dock__ring, .hm-dock__pulse { border-radius: 17px; inset: -3px; }
+    .hm-dock__tip { font-size: 0.82rem; padding: 6px 14px; right: calc(100% + 10px); }
+    .hm-dock-wrapper { right: 28px; }
+}
+
+@media (min-height: 900px) {
+    .hm-dock__btn { width: 64px; height: 64px; font-size: 1.7rem; border-radius: 18px; }
+    .hm-dock__glass { gap: 8px; padding: 20px 14px; }
+    .hm-dock__ring, .hm-dock__pulse { border-radius: 22px; inset: -5px; }
+}

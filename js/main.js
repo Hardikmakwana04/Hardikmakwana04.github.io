@@ -811,3 +811,99 @@ if (statsSection) {
         });
     }
 })();
+
+/* ================================================================
+   FLOATING ICON DOCK — JavaScript Controller
+   ================================================================ */
+(function initDock() {
+    const wrapper = document.getElementById('hm-dock-wrapper');
+    if (!wrapper) return;
+
+    const buttons = wrapper.querySelectorAll('.hm-dock__btn');
+    const glow = wrapper.querySelector('.hm-dock__glow');
+    const sectionIds = ['hero', 'about', 'skills', 'education', 'experience', 'projects', 'certificates', 'languages', 'contact'];
+
+    // Show/hide dock + track active section on scroll
+    function onScroll() {
+        const scrollY = window.scrollY;
+        const scrollMid = scrollY + window.innerHeight / 2;
+
+        // Show dock after scrolling past 200px
+        if (scrollY > 200) {
+            wrapper.classList.add('visible');
+        } else {
+            wrapper.classList.remove('visible');
+        }
+
+        // Find active section
+        let activeId = sectionIds[0];
+        for (let i = sectionIds.length - 1; i >= 0; i--) {
+            const sec = document.getElementById(sectionIds[i]);
+            if (sec && sec.offsetTop <= scrollMid) {
+                activeId = sectionIds[i];
+                break;
+            }
+        }
+
+        // Update button states
+        buttons.forEach(btn => {
+            const sectionId = btn.getAttribute('data-section');
+            const isActive = sectionId === activeId;
+
+            if (isActive && !btn.classList.contains('hm-dock__btn--on')) {
+                btn.classList.add('hm-dock__btn--on');
+                // Add ring + pulse elements
+                if (!btn.querySelector('.hm-dock__ring')) {
+                    const ring = document.createElement('span');
+                    ring.className = 'hm-dock__ring';
+                    btn.appendChild(ring);
+                }
+                if (!btn.querySelector('.hm-dock__pulse')) {
+                    const pulse = document.createElement('span');
+                    pulse.className = 'hm-dock__pulse';
+                    btn.appendChild(pulse);
+                }
+                // Update glow color
+                const color = getComputedStyle(btn).getPropertyValue('--c').trim();
+                if (glow && color) {
+                    glow.style.background = `radial-gradient(ellipse at center, ${color} 0%, transparent 72%)`;
+                }
+            } else if (!isActive && btn.classList.contains('hm-dock__btn--on')) {
+                btn.classList.remove('hm-dock__btn--on');
+                const ring = btn.querySelector('.hm-dock__ring');
+                const pulse = btn.querySelector('.hm-dock__pulse');
+                if (ring) ring.remove();
+                if (pulse) pulse.remove();
+            }
+        });
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll(); // Initial check
+
+    // Click handler — smart scroll positioning
+    buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const sectionId = btn.getAttribute('data-section');
+            const section = document.getElementById(sectionId);
+            if (!section) return;
+
+            const rect = section.getBoundingClientRect();
+            const sectionTop = rect.top + window.pageYOffset;
+            const sectionHeight = rect.height;
+            const viewportHeight = window.innerHeight;
+            const navbarOffset = 80;
+
+            let scrollTarget;
+            if (sectionHeight <= viewportHeight - navbarOffset) {
+                // Section fits in viewport → center it
+                scrollTarget = sectionTop - (viewportHeight - sectionHeight) / 2;
+            } else {
+                // Section taller than viewport → scroll to top with offset
+                scrollTarget = sectionTop - navbarOffset;
+            }
+
+            window.scrollTo({ top: Math.max(0, scrollTarget), behavior: 'smooth' });
+        });
+    });
+})();
