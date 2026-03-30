@@ -377,6 +377,24 @@ if (cursorDot && cursorRing) {
     });
 }
 
+/* ===== THEME TOGGLE ===== */
+const themeToggleBtn = document.getElementById('theme-toggle');
+const htmlRoot = document.documentElement;
+
+function applyTheme(theme) {
+    if (theme === 'light') {
+        htmlRoot.setAttribute('data-theme', 'light');
+    } else {
+        htmlRoot.removeAttribute('data-theme');
+    }
+    localStorage.setItem('hm-theme', theme);
+}
+
+themeToggleBtn?.addEventListener('click', () => {
+    const current = htmlRoot.getAttribute('data-theme');
+    applyTheme(current === 'light' ? 'dark' : 'light');
+});
+
 /* ===== NAVBAR ===== */
 const navbar = document.querySelector('.navbar');
 const hamburger = document.querySelector('.hamburger');
@@ -569,15 +587,47 @@ function initAnimations() {
     ScrollTrigger.refresh();
 }
 
-/* ===== SMOOTH SCROLL FOR ANCHOR LINKS ===== */
+/* ===== SMOOTH SCROLL FOR ANCHOR LINKS & DOCK ===== */
+function scrollToCenter(target) {
+    if (target) {
+        const rect = target.getBoundingClientRect();
+        const sectionTop = rect.top + window.pageYOffset;
+        const sectionHeight = rect.height;
+        const viewportHeight = window.innerHeight;
+        
+        // Unconditionally align the exact center of the section with the exact center of the viewport
+        const top = sectionTop - (viewportHeight - sectionHeight) / 2;
+        
+        window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+    }
+}
+
+// Old anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            const offset = 80;
-            const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
-            window.scrollTo({ top, behavior: 'smooth' });
+        scrollToCenter(target);
+    });
+});
+
+// New 3D dock icons
+document.querySelectorAll('.hm-dock__btn').forEach(btn => {
+    btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        const sectionId = this.getAttribute('data-section');
+        const target = document.getElementById(sectionId);
+        scrollToCenter(target);
+        
+        // Visually activate the clicked dock icon immediately
+        document.querySelectorAll('.hm-dock__btn').forEach(b => {
+            b.classList.remove('hm-dock__btn--on');
+            // Remove rings and pulses from others
+            b.querySelectorAll('.hm-dock__ring, .hm-dock__pulse').forEach(el => el.remove());
+        });
+        this.classList.add('hm-dock__btn--on');
+        if (!this.querySelector('.hm-dock__ring')) {
+            this.insertAdjacentHTML('beforeend', '<span class="hm-dock__ring"></span><span class="hm-dock__pulse"></span>');
         }
     });
 });

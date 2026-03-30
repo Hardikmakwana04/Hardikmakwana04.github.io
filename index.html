@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="html-root">
 
 <head>
     <meta charset="UTF-8">
@@ -15,6 +15,16 @@
     <meta property="og:type" content="website">
 
     <title>Hardik Makwana | Portfolio</title>
+
+    <!-- Anti-FOUC: apply saved theme before first paint -->
+    <script>
+        (function () {
+            const saved = localStorage.getItem('hm-theme');
+            if (saved === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -57,6 +67,11 @@
                     <i class="fas fa-download"></i> Resume
                 </a>
             </div>
+            <!-- Theme Toggle -->
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" title="Toggle dark/light mode">
+                <i class="fas fa-moon icon-dark"></i>
+                <i class="fas fa-sun icon-light"></i>
+            </button>
             <div class="hamburger" id="hamburger">
                 <span></span>
                 <span></span>
@@ -65,6 +80,7 @@
         </div>
     </nav>
     <div class="nav-overlay" id="nav-overlay"></div>
+
 
     <!-- ========== HERO SECTION ========== -->
     <section class="hero" id="hero">
