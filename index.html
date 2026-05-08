@@ -488,6 +488,120 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Semester 2 Results -->
+                        <div class="semester-results">
+                            <button class="semester-toggle" onclick="this.parentElement.classList.toggle('open')">
+                                <div class="semester-toggle-left">
+                                    <i class="fas fa-chart-bar"></i>
+                                    <span>Semester 2 Results — Apr 2026</span>
+                                </div>
+                                <div class="semester-toggle-right">
+                                    <span class="sgpa-badge">SGPA: 8.05</span>
+                                    <span class="grade-badge-a">Grade: A</span>
+                                    <i class="fas fa-chevron-down semester-arrow"></i>
+                                </div>
+                            </button>
+                            <div class="semester-details">
+                                <div class="semester-table-wrapper">
+                                    <table class="semester-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Subject</th>
+                                                <th>Type</th>
+                                                <th>Credits</th>
+                                                <th>Marks</th>
+                                                <th>%</th>
+                                                <th>Grade</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Research Methods and Techniques</td>
+                                                <td><span class="type-tag theory">Theory</span></td>
+                                                <td>4</td>
+                                                <td>67</td>
+                                                <td>67.00%</td>
+                                                <td><span class="grade-cell bplus">B+</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Critical Thinking & Problem Solving</td>
+                                                <td><span class="type-tag theory">Theory</span></td>
+                                                <td>4</td>
+                                                <td>76</td>
+                                                <td>76.00%</td>
+                                                <td><span class="grade-cell a-grade">A</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Info Literacy & Digital Skills</td>
+                                                <td><span class="type-tag theory">Theory</span></td>
+                                                <td>4</td>
+                                                <td>80</td>
+                                                <td>80.00%</td>
+                                                <td><span class="grade-cell a-grade">A</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Applied AI</td>
+                                                <td><span class="type-tag theory">Theory</span></td>
+                                                <td>3</td>
+                                                <td>54</td>
+                                                <td>77.14%</td>
+                                                <td><span class="grade-cell a-grade">A</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Applied AI</td>
+                                                <td><span class="type-tag practical">Practical</span></td>
+                                                <td>1</td>
+                                                <td>28</td>
+                                                <td>93.33%</td>
+                                                <td><span class="grade-cell aplus">A+</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Field Project</td>
+                                                <td><span class="type-tag project">Project</span></td>
+                                                <td>4</td>
+                                                <td>89</td>
+                                                <td>89.00%</td>
+                                                <td><span class="grade-cell aplus">A+</span></td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr class="total-row">
+                                                <td><strong>Total</strong></td>
+                                                <td></td>
+                                                <td><strong>20</strong></td>
+                                                <td><strong>394</strong></td>
+                                                <td></td>
+                                                <td><span class="grade-cell a-grade">A</span></td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <div class="semester-summary-bar">
+                                    <div class="summary-item">
+                                        <span class="summary-label">Total Credits</span>
+                                        <span class="summary-value">20</span>
+                                    </div>
+                                    <div class="summary-item">
+                                        <span class="summary-label">Credits Obtained</span>
+                                        <span class="summary-value">20</span>
+                                    </div>
+                                    <div class="summary-item">
+                                        <span class="summary-label">SGPA</span>
+                                        <span class="summary-value highlight">8.05</span>
+                                    </div>
+                                    <div class="summary-item">
+                                        <span class="summary-label">Result</span>
+                                        <span class="summary-value pass">PASS</span>
+                                    </div>
+                                </div>
+                                <div class="semester-marksheet-btn-wrap">
+                                    <button class="semester-view-marksheet-btn" onclick="event.stopPropagation(); window.open('assets/sem2_marksheet.pdf', '_blank')">
+                                        <i class="fas fa-file-pdf"></i> View Official Marksheet (PDF)
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -539,6 +653,32 @@
                 <div class="section-label">Experience</div>
                 <h2 class="section-title shiny-text">Professional Journey</h2>
                 <div class="section-divider"></div>
+            </div>
+
+            <div class="experience-card gradient-border-card" style="margin-bottom: 30px;">
+                <div class="experience-header">
+                    <div>
+                        <h3 class="experience-role">Artificial Intelligence Intern</h3>
+                        <div class="experience-company"><i class="fas fa-robot"></i> CodeAlpha</div>
+                    </div>
+                    <div class="experience-date-badge">
+                        <i class="fas fa-calendar-alt"></i> Apr 2026 – Apr 2026
+                    </div>
+                </div>
+                <ul class="experience-list">
+                    <li>Completed a one-month virtual internship focused on Artificial Intelligence technologies.</li>
+                    <li>Demonstrated excellent analytical skills and applied machine learning techniques to real-world problems.</li>
+                    <li>Quickly acquired new skills and adapted to emerging AI technologies and tools.</li>
+                    <li>Made valuable contributions and fostered strong collaboration with team members.</li>
+                </ul>
+                <div style="margin-top: 16px; display: flex; flex-wrap: wrap; gap: 10px;">
+                    <button onclick="window.open('assets/codealpha_certificate.pdf', '_blank')" class="magnetic-btn" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 22px; background: var(--bg-glass); border: 1px solid var(--border-glass); border-radius: 50px; color: var(--accent-primary); cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.3s ease;">
+                        <i class="fas fa-certificate"></i> View Certificate
+                    </button>
+                    <button onclick="window.open('assets/codealpha_lor.pdf', '_blank')" class="magnetic-btn" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 22px; background: var(--bg-glass); border: 1px solid var(--border-glass); border-radius: 50px; color: #34d399; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.3s ease;">
+                        <i class="fas fa-file-alt"></i> View LOR
+                    </button>
+                </div>
             </div>
 
             <div class="experience-card gradient-border-card" style="margin-bottom: 30px;">
@@ -678,6 +818,20 @@
                     <p style="font-size: 0.8em; opacity: 0.6; margin-top: 4px;">Certificate No: ADGJA002606909-031124 • Duration: 510 Hrs • Grade: B</p>
                 </div>
                 <img src="assets/social_media_certificate.jpg" alt="Social Media Certificate" class="cert-thumb">
+            </div>
+
+            <div class="cert-card" onclick="window.open('assets/ai_workshop_certificate.pdf', '_blank')" style="cursor: pointer;" title="Click to view certificate">
+                <div class="cert-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <div class="cert-info">
+                    <h4>AI Workshop <i class="fas fa-external-link-alt" style="font-size: 0.7em; opacity: 0.6; margin-left: 6px;"></i></h4>
+                    <p>Swami Sahajanand College of Commerce & Management — Bhavnagar</p>
+                    <p style="font-size: 0.8em; opacity: 0.6; margin-top: 4px;">Certificate of Participation • AI Workshop</p>
+                </div>
+                <div class="cert-thumb" style="display: flex; align-items: center; justify-content: center; background: var(--bg-glass); border: 1px solid var(--border-glass); border-radius: 12px; width: 80px; height: 80px; flex-shrink: 0;">
+                    <i class="fas fa-file-pdf" style="font-size: 2rem; color: var(--accent-primary); opacity: 0.7;"></i>
+                </div>
             </div>
 
 
