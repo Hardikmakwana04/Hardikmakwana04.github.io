@@ -722,23 +722,54 @@ window.addEventListener('scroll', () => {
 });
 
 /* ===== EMAILJS CONTACT FORM ===== */
-// Initialize EmailJS - Replace these with your actual credentials
 const EMAILJS_PUBLIC_KEY = 'mgQcOPPQ60gbla8xg';
 const EMAILJS_SERVICE_ID = 'service_giyrex4';
 const EMAILJS_TEMPLATE_ID = 'template_m71jkxb';
 
-// Initialize EmailJS
-(function () {
-    if (typeof emailjs !== 'undefined') {
+// Track whether EmailJS has been initialized
+let emailjsInitialized = false;
+
+function ensureEmailJSInit() {
+    if (!emailjsInitialized && typeof emailjs !== 'undefined') {
         emailjs.init(EMAILJS_PUBLIC_KEY);
+        emailjsInitialized = true;
     }
-})();
+}
+
+// Try to initialize immediately (SDK is loaded before this script)
+ensureEmailJSInit();
+
+// Also try on DOMContentLoaded in case of timing issues
+document.addEventListener('DOMContentLoaded', ensureEmailJSInit);
 
 const contactForm = document.getElementById('contact-form');
 const formStatus = document.getElementById('form-status');
+let formStatusTimer = null;
+
+function showFormStatus(type, message) {
+    // Clear any pending hide timer
+    if (formStatusTimer) {
+        clearTimeout(formStatusTimer);
+        formStatusTimer = null;
+    }
+    // Reset inline display style so CSS class can take effect
+    formStatus.style.display = '';
+    formStatus.className = 'form-status ' + type;
+    formStatus.innerHTML = message;
+
+    // Auto-hide after 6 seconds
+    formStatusTimer = setTimeout(() => {
+        formStatus.style.display = 'none';
+        formStatus.className = 'form-status';
+        formStatusTimer = null;
+    }, 6000);
+}
 
 contactForm?.addEventListener('submit', function (e) {
     e.preventDefault();
+
+    // Ensure EmailJS is initialized before sending
+    ensureEmailJSInit();
 
     const submitBtn = this.querySelector('.form-submit');
     const originalText = submitBtn.innerHTML;
@@ -753,32 +784,30 @@ contactForm?.addEventListener('submit', function (e) {
         to_email: 'work.hardikm@gmail.com'
     };
 
-    if (typeof emailjs !== 'undefined') {
+    if (typeof emailjs !== 'undefined' && emailjsInitialized) {
         emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
             .then(() => {
-                formStatus.className = 'form-status success';
-                formStatus.innerHTML = '<i class="fas fa-check-circle"></i> Message sent successfully! I\'ll get back to you soon.';
+                showFormStatus('success', '<i class="fas fa-check-circle"></i> Message sent successfully! I\'ll get back to you soon.');
                 contactForm.reset();
             })
             .catch((error) => {
-                formStatus.className = 'form-status error';
-                formStatus.innerHTML = '<i class="fas fa-exclamation-circle"></i> Something went wrong. Please try again or email me directly.';
-                console.error('EmailJS error:', error);
+                const errorText = error?.text || error?.message || JSON.stringify(error);
+                showFormStatus('error', '<i class="fas fa-exclamation-circle"></i> Something went wrong. Please try again or email me directly.');
+                console.error('EmailJS error status:', error?.status);
+                console.error('EmailJS error text:', errorText);
+                console.error('EmailJS full error:', error);
             })
             .finally(() => {
                 submitBtn.innerHTML = originalText;
                 submitBtn.disabled = false;
-                setTimeout(() => { formStatus.style.display = 'none'; formStatus.className = 'form-status'; }, 6000);
             });
     } else {
         // Fallback: mailto
         const mailtoLink = `mailto:work.hardikm@gmail.com?subject=${encodeURIComponent(templateParams.subject)}&body=${encodeURIComponent(`Name: ${templateParams.from_name}\nEmail: ${templateParams.from_email}\n\n${templateParams.message}`)}`;
         window.location.href = mailtoLink;
-        formStatus.className = 'form-status success';
-        formStatus.innerHTML = '<i class="fas fa-check-circle"></i> Opening your email client...';
+        showFormStatus('success', '<i class="fas fa-check-circle"></i> Opening your email client...');
         submitBtn.innerHTML = originalText;
         submitBtn.disabled = false;
-        setTimeout(() => { formStatus.style.display = 'none'; formStatus.className = 'form-status'; }, 6000);
     }
 });
 
