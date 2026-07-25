@@ -2622,6 +2622,37 @@ img {
     color: var(--text-secondary);
 }
 
+/* PDF badge for certificate cards (always visible, unlike .cert-thumb) */
+.cert-pdf-badge {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-glass);
+    border: 1px solid var(--border-glass);
+    border-radius: 12px;
+    flex-shrink: 0;
+    transition: all var(--transition-base);
+}
+
+.cert-pdf-badge i {
+    font-size: 1.6rem;
+    color: var(--accent-primary, #6c63ff);
+    opacity: 0.75;
+    transition: all var(--transition-base);
+}
+
+.cert-card:hover .cert-pdf-badge {
+    border-color: rgba(108, 99, 255, 0.3);
+    background: rgba(108, 99, 255, 0.08);
+}
+
+.cert-card:hover .cert-pdf-badge i {
+    opacity: 1;
+    color: #ff4444;
+}
+
 /* ===== CERTIFICATE MODAL ===== */
 .cert-modal-overlay {
     position: fixed;
@@ -2731,6 +2762,15 @@ img {
         width: 44px;
         height: 44px;
         font-size: 1.1rem;
+    }
+
+    .cert-pdf-badge {
+        width: 44px;
+        height: 44px;
+    }
+
+    .cert-pdf-badge i {
+        font-size: 1.2rem;
     }
 }
 
