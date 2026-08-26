@@ -2622,35 +2622,45 @@ img {
     color: var(--text-secondary);
 }
 
-/* PDF badge for certificate cards (always visible, unlike .cert-thumb) */
-.cert-pdf-badge {
-    width: 56px;
-    height: 56px;
+/* PDF thumbnail for certificate cards (hover animation like .cert-thumb) */
+.cert-thumb-pdf {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%) scale(0.8);
+    width: 80px;
+    height: 60px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: var(--bg-glass);
+    gap: 2px;
+    background: linear-gradient(135deg, rgba(108, 99, 255, 0.15), rgba(108, 99, 255, 0.05));
     border: 1px solid var(--border-glass);
-    border-radius: 12px;
-    flex-shrink: 0;
-    transition: all var(--transition-base);
+    border-radius: 8px;
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    pointer-events: none;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
-.cert-pdf-badge i {
-    font-size: 1.6rem;
-    color: var(--accent-primary, #6c63ff);
-    opacity: 0.75;
-    transition: all var(--transition-base);
-}
-
-.cert-card:hover .cert-pdf-badge {
-    border-color: rgba(108, 99, 255, 0.3);
-    background: rgba(108, 99, 255, 0.08);
-}
-
-.cert-card:hover .cert-pdf-badge i {
-    opacity: 1;
+.cert-thumb-pdf i {
+    font-size: 1.4rem;
     color: #ff4444;
+    transition: all 0.3s ease;
+}
+
+.cert-thumb-pdf span {
+    font-size: 0.55rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+}
+
+.cert-card:hover .cert-thumb-pdf {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
 }
 
 /* ===== CERTIFICATE MODAL ===== */
@@ -2764,13 +2774,18 @@ img {
         font-size: 1.1rem;
     }
 
-    .cert-pdf-badge {
-        width: 44px;
-        height: 44px;
+    .cert-thumb-pdf {
+        width: 60px;
+        height: 45px;
+        right: 12px;
     }
 
-    .cert-pdf-badge i {
-        font-size: 1.2rem;
+    .cert-thumb-pdf i {
+        font-size: 1.1rem;
+    }
+
+    .cert-thumb-pdf span {
+        font-size: 0.5rem;
     }
 }
 
