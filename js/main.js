@@ -1,33 +1,12 @@
 /* ===== CERTIFICATE MODAL ===== */
-function openCertificateModal(src, title) {
+function openCertificateModal(imgSrc, title) {
     const overlay = document.getElementById('cert-modal-overlay');
     const img = document.getElementById('cert-modal-img');
     const titleEl = document.getElementById('cert-modal-title');
-    const wrapper = document.querySelector('.cert-modal-img-wrapper');
-    if (!overlay || !titleEl || !wrapper) return;
+    if (!overlay || !img || !titleEl) return;
 
+    img.src = imgSrc;
     titleEl.textContent = title;
-
-    // Remove any existing iframe
-    const oldIframe = wrapper.querySelector('iframe');
-    if (oldIframe) oldIframe.remove();
-    if (img) img.style.display = 'none';
-
-    const isPdf = src.toLowerCase().endsWith('.pdf');
-    if (isPdf) {
-        // Show PDF in iframe
-        const iframe = document.createElement('iframe');
-        iframe.src = src;
-        iframe.style.cssText = 'width:100%;height:70vh;border:none;border-radius:var(--radius-md);';
-        wrapper.appendChild(iframe);
-    } else {
-        // Show image
-        if (img) {
-            img.src = src;
-            img.style.display = 'block';
-        }
-    }
-
     overlay.classList.add('active');
     document.body.style.overflow = 'hidden';
 }
@@ -37,12 +16,6 @@ function closeCertificateModal() {
     if (!overlay) return;
     overlay.classList.remove('active');
     document.body.style.overflow = '';
-    // Clean up iframe on close
-    const wrapper = document.querySelector('.cert-modal-img-wrapper');
-    if (wrapper) {
-        const iframe = wrapper.querySelector('iframe');
-        if (iframe) iframe.remove();
-    }
 }
 
 // Close modal with Escape key
