@@ -2688,7 +2688,10 @@ img {
 .cert-modal {
     position: relative;
     max-width: 900px;
+    max-height: calc(100vh - 48px);
     width: 100%;
+    display: flex;
+    flex-direction: column;
     background: var(--bg-secondary);
     border: 1px solid var(--border-glass);
     border-radius: var(--radius-xl);
@@ -2741,13 +2744,20 @@ img {
 
 .cert-modal-img-wrapper {
     border-radius: var(--radius-md);
-    overflow: hidden;
+    overflow: auto;
     border: 1px solid var(--border-glass);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    max-height: calc(100vh - 150px);
 }
 
 .cert-modal-img {
-    width: 100%;
+    width: auto;
+    max-width: 100%;
+    max-height: calc(100vh - 154px);
     height: auto;
+    object-fit: contain;
     display: block;
     border-radius: var(--radius-md);
 }
